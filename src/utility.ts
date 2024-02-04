@@ -10,7 +10,7 @@ export const utilityGetFromStorage = <T>(item: string): T[] => {
 };
 
 /**
- *
+ * To save any kind of object in `localStorage` as new `obj` inside the array of the `item` already inside storage.
  * @param item string of the thing you need to retrive in `localStorage`
  * @param obj  an `Array<T>` where `T` is a generic Type, to insert something like a `CardData` or any other type I might to save for later.
  */
