@@ -1,19 +1,8 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { utilityGetFromStorage } from "./utility";
-
-interface GridProps {
-	children?: any;
-}
-
-interface CardProps {
-	id?: Date;
-	imgUrl: string;
-	altText: string;
-	summary?: string;
-	liked?: boolean;
-}
+import { CardProps, GridProps } from "./declaration";
 
 const Wrapper = styled.div``;
 
@@ -28,7 +17,13 @@ const styleHearButton = {
 };
 
 const Card: FC<CardProps> = memo(
-	({ imgUrl, altText }: CardProps): JSX.Element => {
+	({
+		id,
+		imgUrl,
+		title = "title",
+		summary = "summary",
+		liked = false,
+	}: CardProps): JSX.Element => {
 		const iconTrue = "❤️";
 		const iconFalse = "♡";
 		const [isLiked, setIsLiked] = useState(false);
@@ -39,9 +34,10 @@ const Card: FC<CardProps> = memo(
 
 		return (
 			<div>
-				<img src={imgUrl} alt={altText} />
+				<img src={imgUrl} alt="" />
 				<div>
-					{/* <p> summary={summary}</p> */}
+					<h3>{title.toUpperCase()}</h3>
+					<p> {summary}</p>
 					<button onClick={onSaveToFavorites} style={styleHearButton}>
 						<span>{isLiked ? iconTrue : iconFalse}</span>
 					</button>
@@ -51,26 +47,21 @@ const Card: FC<CardProps> = memo(
 	}
 );
 
-export const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
-	const allCards: Array<CardProps> = utilityGetFromStorage("allCards");
+export const CardsGrid: FC<GridProps> = memo(
+	({ children, allCards }): JSX.Element => {
+		// const allCards: Array<CardProps> = utilityGetFromStorage("allCards");
 
-	return (
-		<>
-			<h2>{children}</h2>
-			<Wrapper>
-				<Card
-					imgUrl="https://emojipedia.org/_next/image?url=https%3A%2F%2Fem-content.zobj.net%2Fcontent%2Fevents%2FSuper_Bowl_PNG.png&w=360&q=75"
-					altText="superbowl emojis"
-				/>
-				<Card
-					imgUrl="https://emojipedia.org/_next/image?url=https%3A%2F%2Fem-content.zobj.net%2Fcontent%2Fevents%2FValentines_Day_PNG.png&w=360&q=75"
-					altText="Valentine's Day emojis"
-				/>
-				<Card
-					imgUrl="https://emojipedia.org/_next/image?url=https%3A%2F%2Fem-content.zobj.net%2Fcontent%2Fevents%2FMardi_Gras_PNG.png&w=360&q=75"
-					altText="Mardì Gras emojis"
-				/>
-			</Wrapper>
-		</>
-	);
-});
+		return (
+			<>
+				<h2>{children}</h2>
+				<Wrapper>
+					{allCards.map(
+						({ imgUrl, title, summary }: CardProps): JSX.Element => (
+							<Card imgUrl={imgUrl} title={title} summary={summary} />
+						)
+					)}
+				</Wrapper>
+			</>
+		);
+	}
+);

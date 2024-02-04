@@ -1,12 +1,7 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC } from "react";
-
-interface Props {
-	children?: any;
-	onClickGoHome: () => void;
-	onClickGoFavorites: () => void;
-}
+import { HeaderProps } from "./declaration";
 
 const NavBar = styled.nav({
 	padding: "0 2rem",
@@ -33,7 +28,7 @@ const Link = styled.a(
 	hover
 );
 
-export const Header: FC<Props> = ({
+export const Header: FC<HeaderProps> = ({
 	onClickGoHome,
 	onClickGoFavorites,
 }): JSX.Element => {
