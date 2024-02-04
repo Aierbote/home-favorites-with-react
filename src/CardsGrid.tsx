@@ -3,7 +3,29 @@ import PropTypes from "prop-types";
 import { FC, memo, useEffect, useState } from "react";
 import { CardProps, GridProps } from "./declaration";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+	gap: 2.125rem;
+`;
+
+const StyledCard = styled.div`
+	border: #0000001a 0.125rem solid;
+	width: 22.5rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	max-height: 30.1525rem;
+	min-height: min-content;
+`;
+
+const imgWidth = {
+	maxWidth: "22.5rem",
+	width: "22.5rem",
+	maxHeight: "15rem",
+	minHeight: "10rem",
+};
 
 Wrapper.propTypes = {};
 
@@ -18,7 +40,7 @@ const styleHearButton = {
 const Card: FC<CardProps> = memo(
 	({
 		id,
-		imgUrl,
+		imgUrl = "https://tse2.mm.bing.net/th?id=OIP.Uge8n3cdvDQTUusYkX_BwAHaFl&pid=Api",
 		title = "title",
 		summary = "summary",
 		liked = false,
@@ -32,8 +54,8 @@ const Card: FC<CardProps> = memo(
 		};
 
 		return (
-			<div>
-				<img src={imgUrl} alt="" />
+			<StyledCard>
+				<img src={imgUrl} alt="" style={imgWidth} />
 				<div>
 					<h3>{title.toUpperCase()}</h3>
 					<p> {summary}</p>
@@ -41,7 +63,7 @@ const Card: FC<CardProps> = memo(
 						<span>{isLiked ? iconTrue : iconFalse}</span>
 					</button>
 				</div>
-			</div>
+			</StyledCard>
 		);
 	}
 );
