@@ -2,6 +2,12 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC } from "react";
 
+interface Props {
+	children?: any;
+	onClickGoHome: () => void;
+	onClickGoFavorites: () => void;
+}
+
 const NavBar = styled.nav({
 	padding: "0 2rem",
 	display: "flex",
@@ -27,11 +33,24 @@ const Link = styled.a(
 	hover
 );
 
-export const Header: FC = (): JSX.Element => {
+export const Header: FC<Props> = ({
+	onClickGoHome,
+	onClickGoFavorites,
+}): JSX.Element => {
 	return (
 		<NavBar>
-			<Link>Home</Link>
-			<Link>Favorites</Link>
+			<Link key={"home"} onClick={onClickGoHome}>
+				Home
+			</Link>
+			<Link key={"favorites"} onClick={onClickGoFavorites}>
+				Favorites
+			</Link>
 		</NavBar>
 	);
+};
+
+Header.propTypes = {
+	children: PropTypes.element,
+	onClickGoHome: PropTypes.func.isRequired,
+	onClickGoFavorites: PropTypes.func.isRequired,
 };
