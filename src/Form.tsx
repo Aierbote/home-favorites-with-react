@@ -26,11 +26,13 @@ export const Form: FC = memo((): JSX.Element => {
 	return (
 		<form onSubmit={onSubmit}>
 			<Input
+				type="text"
 				placeholder="descriptive text"
 				value={summary}
 				onChange={onChangeSummary}
 			/>
 			<Input
+				type="url"
 				placeholder="URL of an image"
 				value={imgUrl}
 				onChange={onChangeImgUrl}
