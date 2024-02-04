@@ -1,9 +1,10 @@
 import "./App.css";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { CardsGrid } from "./CardsGrid";
 import { CardProps } from "./declaration";
+import { utilityGetFromStorage } from "./utility";
 
 const App: FC = memo((): JSX.Element => {
 	const [isWhere, setIsWhere] = useState<"home" | "favorites">("home");
@@ -22,6 +23,12 @@ const App: FC = memo((): JSX.Element => {
 			(oldCards: Array<CardProps>): Array<CardProps> => [...oldCards, newCard]
 		);
 	};
+
+	useEffect(() => {
+		const allStoredCards: Array<CardProps> = utilityGetFromStorage("allCards");
+
+		setAllCards(allStoredCards);
+	}, []);
 
 	return (
 		<>

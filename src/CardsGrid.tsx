@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC, memo, useEffect, useState } from "react";
-import { utilityGetFromStorage } from "./utility";
 import { CardProps, GridProps } from "./declaration";
 
 const Wrapper = styled.div``;
@@ -49,8 +48,6 @@ const Card: FC<CardProps> = memo(
 
 export const CardsGrid: FC<GridProps> = memo(
 	({ children, allCards }): JSX.Element => {
-		// const allCards: Array<CardProps> = utilityGetFromStorage("allCards");
-
 		return (
 			<>
 				<h2>{children}</h2>
