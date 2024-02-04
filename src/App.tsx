@@ -5,14 +5,14 @@ import { Form } from "./Form";
 import { CardsGrid } from "./CardsGrid";
 
 const App: FC = memo((): JSX.Element => {
-	const [isInHome, setIsInHome] = useState(true);
+	const [isWhere, setIsWhere] = useState<"home" | "favorites">("home");
 
 	const onClickGoHome = () => {
-		setIsInHome(true);
+		setIsWhere("home");
 	};
 
 	const onClickGoFavorites = () => {
-		setIsInHome(false);
+		setIsWhere("favorites");
 	};
 
 	return (
@@ -21,9 +21,10 @@ const App: FC = memo((): JSX.Element => {
 				onClickGoHome={onClickGoHome}
 				onClickGoFavorites={onClickGoFavorites}
 			/>
-			{isInHome ? <Form /> : null}
+			{isWhere === "home" && <Form />}
 			<CardsGrid>
-				{isInHome ? "list of all cards" : "list of favorites"}
+				{isWhere === "home" && "list of all cards"}
+				{isWhere === "favorites" && "list of favorites"}
 			</CardsGrid>
 		</>
 	);
