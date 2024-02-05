@@ -12,7 +12,7 @@ export interface GridProps {
 }
 
 export interface CardProps {
-	id?: Date;
+	id?: string;
 	imgUrl: string;
 	title?: string;
 	summary: string;

@@ -21,3 +21,9 @@ export const utilitySaveToStorage = <T, U>(item: string, obj: U): void => {
 
 	localStorage.setItem(item, JSON.stringify(newItem));
 };
+
+export const utilityUpdateInStorage = (item: string, id: string) => {
+	const oldItem = utilityGetFromStorage(item);
+	const oldElem = oldItem;
+	console.log(oldItem);
+};

@@ -27,7 +27,7 @@ export const Form: FC<FormProps> = memo(({ onCardSubmit }): JSX.Element => {
 		event.preventDefault();
 
 		const newCard: CardProps = {
-			id: new Date(),
+			id: new Date().toISOString(),
 			imgUrl: newImgUrl,
 			title: newTitle,
 			summary: newSummary,
