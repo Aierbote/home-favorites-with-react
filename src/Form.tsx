@@ -7,7 +7,7 @@ import { useAppContext } from "./MyContext";
 
 const Input = styled.input``;
 
-export const Form: FC = memo((): JSX.Element => {
+const Form: FC = memo((): JSX.Element => {
 	const [newImgUrl, setNewImgUrl] = useState("");
 	const [newSummary, setNewSummary] = useState("");
 	const [newTitle, setNewTitle] = useState("");
@@ -73,3 +73,5 @@ export const Form: FC = memo((): JSX.Element => {
 		</form>
 	);
 });
+
+export default Form;

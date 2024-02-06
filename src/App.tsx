@@ -1,11 +1,9 @@
 import "./App.css";
-import { FC, memo, useEffect, useState } from "react";
-import { Header } from "./Header";
-import { Form } from "./Form";
-import { CardsGrid } from "./CardsGrid";
-import { TypeMyContext } from "./declaration";
-import { utilityGetCardsFromStorage } from "./utility";
+import { FC, memo, useEffect, useState, lazy, Suspense } from "react";
 import { AppProvider } from "./MyContext";
+const Header = lazy(() => import("./Header"));
+const Form = lazy(() => import("./Form"));
+const CardsGrid = lazy(() => import("./CardsGrid"));
 
 const App: FC = memo((): JSX.Element => {
 	const [isWhere, setIsWhere] = useState<"home" | "favorites">("home");
@@ -25,15 +23,23 @@ const App: FC = memo((): JSX.Element => {
 		// 	allCards, // contentCards
 		// }}
 		>
-			<Header
-				onClickGoHome={onClickGoHome}
-				onClickGoFavorites={onClickGoFavorites}
-			/>
-			{isWhere === "home" && <Form />}
-			<CardsGrid>
-				{isWhere === "home" && "list of all cards"}
-				{isWhere === "favorites" && "list of favorites"}
-			</CardsGrid>
+			<Suspense fallback={<header>Loading Header...</header>}>
+				<Header
+					onClickGoHome={onClickGoHome}
+					onClickGoFavorites={onClickGoFavorites}
+				/>
+			</Suspense>
+			{isWhere === "home" && (
+				<Suspense fallback={<div>Loading Form...</div>}>
+					<Form />
+				</Suspense>
+			)}
+			<Suspense fallback={<div>Loading Cards...</div>}>
+				<CardsGrid>
+					{isWhere === "home" && "list of all cards"}
+					{isWhere === "favorites" && "list of favorites"}
+				</CardsGrid>
+			</Suspense>
 		</AppProvider>
 	);
 });

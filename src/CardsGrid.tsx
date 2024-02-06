@@ -68,7 +68,7 @@ const Card: FC<CardProps> = memo(
 	}
 );
 
-export const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
+const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
 	const { contentCards } = useAppContext() as TypeMyContext;
 
 	return (
@@ -84,3 +84,5 @@ export const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
 		</>
 	);
 });
+
+export default CardsGrid;

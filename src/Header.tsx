@@ -28,7 +28,7 @@ const Link = styled.a(
 	hover
 );
 
-export const Header: FC<HeaderProps> = ({
+const Header: FC<HeaderProps> = ({
 	onClickGoHome,
 	onClickGoFavorites,
 }): JSX.Element => {
@@ -49,3 +49,5 @@ Header.propTypes = {
 	onClickGoHome: PropTypes.func.isRequired,
 	onClickGoFavorites: PropTypes.func.isRequired,
 };
+
+export default Header;
