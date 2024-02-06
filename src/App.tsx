@@ -3,12 +3,14 @@ import { FC, memo, useEffect, useState } from "react";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { CardsGrid } from "./CardsGrid";
-import { CardProps, TypeMyContext } from "./declaration";
+import { TypeMyContext } from "./declaration";
 import { utilityGetCardsFromStorage } from "./utility";
+import { AppProvider, CounterProvider } from "./MyContext";
 
 const App: FC = memo((): JSX.Element => {
 	const [isWhere, setIsWhere] = useState<"home" | "favorites">("home");
-	const [allCards, setAllCards] = useState<Array<CardProps>>([]);
+	const [allCards, setAllCards] = useState<TypeMyContext["contentCards"]>([]);
+	const [likedCards, setLikedCards] = useState<TypeMyContext["likedCards"]>([]);
 
 	const onClickGoHome = () => {
 		setIsWhere("home");
@@ -18,10 +20,11 @@ const App: FC = memo((): JSX.Element => {
 		setIsWhere("favorites");
 	};
 
-	const onCardSubmit = (newCard: CardProps) => {
-		setAllCards(
-			(oldCards: Array<CardProps>): Array<CardProps> => [...oldCards, newCard]
-		);
+	const onCardSubmit = (newCard: TypeMyContext["contentCards"][number]) => {
+		setAllCards((oldCards: TypeMyContext["contentCards"]) => [
+			...oldCards,
+			newCard,
+		]);
 	};
 
 	useEffect(() => {
@@ -31,7 +34,12 @@ const App: FC = memo((): JSX.Element => {
 	}, []);
 
 	return (
-		<>
+		<AppProvider
+			value={{
+				likedCards, // likedCards
+				allCards, // contentCards
+			}}
+		>
 			<Header
 				onClickGoHome={onClickGoHome}
 				onClickGoFavorites={onClickGoFavorites}
@@ -41,7 +49,7 @@ const App: FC = memo((): JSX.Element => {
 				{isWhere === "home" && "list of all cards"}
 				{isWhere === "favorites" && "list of favorites"}
 			</CardsGrid>
-		</>
+		</AppProvider>
 	);
 });
 
