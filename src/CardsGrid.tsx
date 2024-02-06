@@ -76,8 +76,8 @@ export const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
 			<h2>{children}</h2>
 			<Wrapper>
 				{contentCards?.map(
-					({ imgUrl, title, summary }: CardProps): JSX.Element => (
-						<Card imgUrl={imgUrl} title={title} summary={summary} />
+					({ id, imgUrl, title, summary }: CardProps): JSX.Element => (
+						<Card key={id} imgUrl={imgUrl} title={title} summary={summary} />
 					)
 				)}
 			</Wrapper>
