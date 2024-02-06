@@ -8,7 +8,7 @@ export interface HeaderProps {
 
 export interface GridProps {
 	children?: any;
-	allCards: Array<CardProps>;
+	allCards?: Array<CardProps>;
 }
 
 export interface CardProps {

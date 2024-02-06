@@ -30,7 +30,7 @@ const App: FC = memo((): JSX.Element => {
 				onClickGoFavorites={onClickGoFavorites}
 			/>
 			{isWhere === "home" && <Form />}
-			<CardsGrid allCards={allCards}>
+			<CardsGrid>
 				{isWhere === "home" && "list of all cards"}
 				{isWhere === "favorites" && "list of favorites"}
 			</CardsGrid>

@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC, memo, useEffect, useState } from "react";
-import { CardProps, GridProps } from "./declaration";
+import { CardProps, GridProps, TypeMyContext } from "./declaration";
+import { useAppContext } from "./MyContext";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -67,19 +68,19 @@ const Card: FC<CardProps> = memo(
 	}
 );
 
-export const CardsGrid: FC<GridProps> = memo(
-	({ children, allCards }): JSX.Element => {
-		return (
-			<>
-				<h2>{children}</h2>
-				<Wrapper>
-					{allCards.map(
-						({ imgUrl, title, summary }: CardProps): JSX.Element => (
-							<Card imgUrl={imgUrl} title={title} summary={summary} />
-						)
-					)}
-				</Wrapper>
-			</>
-		);
-	}
-);
+export const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
+	const { contentCards } = useAppContext() as TypeMyContext;
+
+	return (
+		<>
+			<h2>{children}</h2>
+			<Wrapper>
+				{contentCards?.map(
+					({ imgUrl, title, summary }: CardProps): JSX.Element => (
+						<Card imgUrl={imgUrl} title={title} summary={summary} />
+					)
+				)}
+			</Wrapper>
+		</>
+	);
+});

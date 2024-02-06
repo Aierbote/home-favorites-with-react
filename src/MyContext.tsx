@@ -1,7 +1,10 @@
 import { FC, useEffect } from "react";
 import { ReactNode, createContext, useContext, useState } from "react";
 import { TypeMyContext } from "./declaration";
-import { utilityGetCardsFromStorage } from "./utility";
+import {
+	utilityGetCardsFromStorage,
+	utilityGetLikedCardsFromStorage,
+} from "./utility";
 
 export const AppContext = createContext<TypeMyContext | null>(null);
 
@@ -28,7 +31,10 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	useEffect(() => {
 		const allStoredCards: TypeMyContext["contentCards"] =
 			utilityGetCardsFromStorage();
+		const allStoredLikes: TypeMyContext["likedCards"] =
+			utilityGetLikedCardsFromStorage();
 		setContentCards(allStoredCards);
+		setLikedCards(allStoredLikes);
 	}, []);
 
 	return (
