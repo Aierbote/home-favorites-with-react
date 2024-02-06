@@ -8,33 +8,39 @@ LocalStorage {
 }
 */
 
-/**
- * To get any kind of object stored in `localStorage`
- * @param document string of the thing you need to retrive in `localStorage`
- * @returns something like a `CardData` or any other types I might need later on.
- */
-export const utilityGetFromStorage = (
-	document: string
-): Array<CardProps | boolean> => {
-	const cachedDocument = localStorage.getItem(document) || "";
-	const parsedDocument = !!cachedDocument ? JSON.parse(document) : [];
-	return parsedDocument;
+export const utilityGetCardsFromStorage = (): TypeMyContext["contentCards"] => {
+	const cachedCards = localStorage.getItem("allCards") || "";
+	const parsedCards = !!cachedCards ? JSON.parse(cachedCards) : [];
+	return parsedCards;
 };
 
-/**
- * To save any kind of object in `localStorage` as new `obj` inside the array of the `item` already inside storage.
- * @param document string of the thing you need to retrive in `localStorage`
- * @param elem  an `Array<T>` where `T` is a generic Type, to insert something like a `CardData` or any other type I might to save for later.
- */
-export const utilitySaveToStorage = (
-	document: string,
-	elem: TypeMyContext["likedCards"] | TypeMyContext["contentCards"]
+export const utilitySaveCardsToStorage = (
+	elem: TypeMyContext["contentCards"]
 ): void => {
-	const prevDocument = utilityGetFromStorage(document);
+	const prevCards = utilityGetCardsFromStorage();
 
-	const newItem = [...prevDocument, elem];
+	const newItem = [...prevCards, elem];
 
-	localStorage.setItem(document, JSON.stringify(newItem));
+	localStorage.setItem("allCards", JSON.stringify(newItem));
+};
+
+export const utilityGetLikedCardsFromStorage =
+	(): TypeMyContext["likedCards"] => {
+		const cachedLikedCards = localStorage.getItem("allLikedCards") || "";
+		const parsedLikedCards = !!cachedLikedCards
+			? JSON.parse(cachedLikedCards)
+			: [];
+		return parsedLikedCards;
+	};
+
+export const utilitySaveLikedCardsToStorage = (
+	elem: TypeMyContext["likedCards"]
+): void => {
+	const prevLikedCards = utilityGetLikedCardsFromStorage();
+
+	const newItem = [...prevLikedCards, elem];
+
+	localStorage.setItem("allLikedCards", JSON.stringify(newItem));
 };
 
 // export const utilityUpdateInStorage = (item: string, id: string) => {

@@ -3,8 +3,8 @@ import { FC, memo, useEffect, useState } from "react";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { CardsGrid } from "./CardsGrid";
-import { CardProps } from "./declaration";
-import { utilityGetFromStorage } from "./utility";
+import { CardProps, TypeMyContext } from "./declaration";
+import { utilityGetCardsFromStorage } from "./utility";
 
 const App: FC = memo((): JSX.Element => {
 	const [isWhere, setIsWhere] = useState<"home" | "favorites">("home");
@@ -25,8 +25,8 @@ const App: FC = memo((): JSX.Element => {
 	};
 
 	useEffect(() => {
-		const allStoredCards: Array<CardProps> = utilityGetFromStorage("allCards");
-
+		const allStoredCards: TypeMyContext["contentCards"] =
+			utilityGetCardsFromStorage();
 		setAllCards(allStoredCards);
 	}, []);
 
