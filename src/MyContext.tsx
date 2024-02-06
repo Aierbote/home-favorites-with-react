@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { ReactNode, createContext, useContext, useState } from "react";
 import { TypeMyContext } from "./declaration";
+import { utilityGetCardsFromStorage } from "./utility";
 
 export const AppContext = createContext<TypeMyContext | null>(null);
 
@@ -23,6 +24,12 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
 			newCard,
 		]);
 	};
+
+	useEffect(() => {
+		const allStoredCards: TypeMyContext["contentCards"] =
+			utilityGetCardsFromStorage();
+		setContentCards(allStoredCards);
+	}, []);
 
 	return (
 		<AppContext.Provider value={{ contentCards, likedCards, onCardSubmit }}>
