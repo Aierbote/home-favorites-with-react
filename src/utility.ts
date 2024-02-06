@@ -15,7 +15,7 @@ export const utilityGetCardsFromStorage = (): TypeMyContext["contentCards"] => {
 };
 
 export const utilitySaveCardsToStorage = (
-	elem: TypeMyContext["contentCards"]
+	elem: TypeMyContext["contentCards"][number]
 ): void => {
 	const prevCards = utilityGetCardsFromStorage();
 

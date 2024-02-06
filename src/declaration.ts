@@ -26,5 +26,10 @@ export interface FormProps {
 
 export interface TypeMyContext {
 	likedCards: Array<string>;
-	contentCards: Array<CardProps>;
+	contentCards: Array<{
+		id: string;
+		imgUrl: string;
+		title: string;
+		summary: string;
+	}>;
 }

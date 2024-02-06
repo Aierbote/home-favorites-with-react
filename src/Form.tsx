@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC, memo, useState, ChangeEvent, FormEventHandler } from "react";
-import { utilitySaveToStorage } from "./utility";
+import { utilitySaveCardsToStorage } from "./utility";
 import { CardProps, FormProps } from "./declaration";
 
 const Input = styled.input``;
@@ -26,15 +26,14 @@ export const Form: FC<FormProps> = memo(({ onCardSubmit }): JSX.Element => {
 	const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
 		event.preventDefault();
 
-		const newCard: CardProps = {
+		const newCard = {
 			id: new Date().toISOString(),
 			imgUrl: newImgUrl,
 			title: newTitle,
 			summary: newSummary,
-			liked: false,
 		};
 
-		utilitySaveToStorage<string, CardProps>("allCards", newCard);
+		utilitySaveCardsToStorage(newCard);
 		onCardSubmit(newCard);
 
 		// resetting the form in the end
