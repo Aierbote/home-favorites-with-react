@@ -43,7 +43,6 @@ const Card: FC<CardProps> = memo(
 		imgUrl = "https://tse2.mm.bing.net/th?id=OIP.Uge8n3cdvDQTUusYkX_BwAHaFl&pid=Api",
 		title = "title",
 		summary = "summary",
-		liked = false,
 	}: CardProps): JSX.Element => {
 		const iconTrue = "❤️";
 		const iconFalse = "♡";
