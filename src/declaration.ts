@@ -12,13 +12,19 @@ export interface GridProps {
 }
 
 export interface CardProps {
-	id?: string;
+	id: string;
 	imgUrl: string;
 	title?: string;
 	summary: string;
-	liked?: boolean;
 }
 
 export interface FormProps {
 	onCardSubmit: (newCard: CardProps) => void;
+}
+
+/* Context of states, props and stored documents */
+
+export interface TypeMyContext {
+	likedCards: Array<string>;
+	contentCards: Array<CardProps>;
 }

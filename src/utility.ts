@@ -1,29 +1,44 @@
+import { CardProps, TypeMyContext } from "./declaration";
+
+/*
+LocalStorage {
+	// stringOfdocument: element{} | element[]
+	"allCards": CardProps[]
+	"likedCards": idCard[]
+}
+*/
+
 /**
  * To get any kind of object stored in `localStorage`
- * @param item string of the thing you need to retrive in `localStorage`
- * @returns an `Array<T>` where `T` is a generic Type, placeholder for something like a `CardData` or any other type I might need later on.
+ * @param document string of the thing you need to retrive in `localStorage`
+ * @returns something like a `CardData` or any other types I might need later on.
  */
-export const utilityGetFromStorage = <T>(item: string): T[] => {
-	const storedString = localStorage.getItem(item) || "";
-	const storedItem: Array<T> = !!storedString ? JSON.parse(storedString) : [];
-	return storedItem;
+export const utilityGetFromStorage = (
+	document: string
+): Array<CardProps | boolean> => {
+	const cachedDocument = localStorage.getItem(document) || "";
+	const parsedDocument = !!cachedDocument ? JSON.parse(document) : [];
+	return parsedDocument;
 };
 
 /**
  * To save any kind of object in `localStorage` as new `obj` inside the array of the `item` already inside storage.
- * @param item string of the thing you need to retrive in `localStorage`
- * @param obj  an `Array<T>` where `T` is a generic Type, to insert something like a `CardData` or any other type I might to save for later.
+ * @param document string of the thing you need to retrive in `localStorage`
+ * @param elem  an `Array<T>` where `T` is a generic Type, to insert something like a `CardData` or any other type I might to save for later.
  */
-export const utilitySaveToStorage = <T, U>(item: string, obj: U): void => {
-	const oldItem = utilityGetFromStorage<T>(item);
+export const utilitySaveToStorage = (
+	document: string,
+	elem: TypeMyContext["likedCards"] | TypeMyContext["contentCards"]
+): void => {
+	const prevDocument = utilityGetFromStorage(document);
 
-	const newItem = [...oldItem, obj];
+	const newItem = [...prevDocument, elem];
 
-	localStorage.setItem(item, JSON.stringify(newItem));
+	localStorage.setItem(document, JSON.stringify(newItem));
 };
 
-export const utilityUpdateInStorage = (item: string, id: string) => {
-	const oldItem = utilityGetFromStorage(item);
-	const oldElem = oldItem;
-	console.log(oldItem);
-};
+// export const utilityUpdateInStorage = (item: string, id: string) => {
+// 	const oldItem = utilityGetFromStorage(item);
+// 	const oldElem = oldItem;
+// 	console.log(oldItem);
+// };
