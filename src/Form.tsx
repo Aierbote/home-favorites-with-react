@@ -2,14 +2,17 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { FC, memo, useState, ChangeEvent, FormEventHandler } from "react";
 import { utilitySaveCardsToStorage } from "./utility";
-import { CardProps, FormProps } from "./declaration";
+import { CardProps, FormProps, TypeMyContext } from "./declaration";
+import { useAppContext } from "./MyContext";
 
 const Input = styled.input``;
 
-export const Form: FC<FormProps> = memo(({ onCardSubmit }): JSX.Element => {
+export const Form: FC = memo((): JSX.Element => {
 	const [newImgUrl, setNewImgUrl] = useState("");
 	const [newSummary, setNewSummary] = useState("");
 	const [newTitle, setNewTitle] = useState("");
+
+	const { onCardSubmit } = useAppContext() as TypeMyContext;
 
 	const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
 		setNewTitle(event.target.value);

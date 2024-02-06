@@ -32,4 +32,5 @@ export interface TypeMyContext {
 		title: string;
 		summary: string;
 	}>;
+	onCardSubmit: (newCard: TypeMyContext["contentCards"][number]) => void;
 }
