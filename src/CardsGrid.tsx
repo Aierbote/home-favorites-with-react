@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FC, memo, useEffect, useState } from "react";
 import { CardProps, GridProps, TypeMyContext } from "./declaration";
 import { useAppContext } from "./MyContext";
+import { utilitySaveLikedCardsToStorage } from "./utility";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -69,7 +70,26 @@ const Card: FC<CardProps> = memo(
 );
 
 const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
-	const { contentCards } = useAppContext() as TypeMyContext;
+	const { contentCards, likedCards, setLikedCards } =
+		useAppContext() as TypeMyContext;
+
+	const toggleLikeInCard = (
+		idkeyOfCard: TypeMyContext["contentCards"][number]["id"]
+	) => {
+		let newLikedCards: TypeMyContext["likedCards"];
+		if (likedCards.includes(idkeyOfCard)) {
+			// toggling off, id all likesCard minus the id of card toggled
+			const filteredLikedCards = likedCards.filter(
+				(liked_) => liked_ !== idkeyOfCard
+			);
+			newLikedCards = filteredLikedCards;
+			setLikedCards(newLikedCards);
+		} else {
+			newLikedCards = [...likedCards, idkeyOfCard];
+			setLikedCards(newLikedCards);
+		}
+		utilitySaveLikedCardsToStorage(newLikedCards);
+	};
 
 	return (
 		<>
@@ -77,7 +97,14 @@ const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
 			<Wrapper>
 				{contentCards?.map(
 					({ id, imgUrl, title, summary }: CardProps): JSX.Element => (
-						<Card key={id} imgUrl={imgUrl} title={title} summary={summary} />
+						<Card
+							key={id}
+							imgUrl={imgUrl}
+							title={title}
+							summary={summary}
+							// TODO : FIXME :
+							toggleLikeInCard={toggleLikeInCard}
+						/>
 					)
 				)}
 			</Wrapper>

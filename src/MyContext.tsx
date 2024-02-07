@@ -38,7 +38,9 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	}, []);
 
 	return (
-		<AppContext.Provider value={{ contentCards, likedCards, onCardSubmit }}>
+		<AppContext.Provider
+			value={{ contentCards, likedCards, setLikedCards, onCardSubmit }}
+		>
 			{children}
 		</AppContext.Provider>
 	);

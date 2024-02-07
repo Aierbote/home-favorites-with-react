@@ -9,6 +9,9 @@ export interface HeaderProps {
 export interface GridProps {
 	children?: any;
 	allCards?: Array<CardProps>;
+	toggleLikeInCard: (
+		idkyeOfCard: TypeMyContext["contentCards"][number]["id"]
+	) => void;
 }
 
 export interface CardProps {
@@ -33,4 +36,5 @@ export interface TypeMyContext {
 		summary: string;
 	}>;
 	onCardSubmit: (newCard: TypeMyContext["contentCards"][number]) => void;
+	setLikedCards: (idkyeOfCard: TypeMyContext["likedCards"]) => void;
 }
