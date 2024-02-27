@@ -1,5 +1,5 @@
 import "./App.css";
-import { FC, memo, useEffect, useState, lazy, Suspense } from "react";
+import { FC, memo, useState, lazy, Suspense } from "react";
 import { AppProvider } from "./MyContext";
 const Header = lazy(() => import("./Header"));
 const Form = lazy(() => import("./Form"));

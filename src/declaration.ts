@@ -9,16 +9,19 @@ export interface HeaderProps {
 export interface GridProps {
 	children?: any;
 	allCards?: Array<CardProps>;
-	toggleLikeInCard: (
+	toggleLikeInCard?: (
 		idkyeOfCard: TypeMyContext["contentCards"][number]["id"]
 	) => void;
 }
 
 export interface CardProps {
-	id?: string;
+	id: string;
 	imgUrl: string;
 	title?: string;
 	summary: string;
+	toggleLikeInCard?: (
+		idkyeOfCard: TypeMyContext["contentCards"][number]["id"]
+	) => void;
 }
 
 export interface FormProps {
@@ -32,10 +35,13 @@ export interface TypeMyContext {
 	contentCards: Array<{
 		id: string;
 		imgUrl: string;
-		title: string;
+		title?: string;
 		summary: string;
+		toggleLikeInCard: (
+			idkyeOfCard: TypeMyContext["likedCards"][number]
+		) => void;
 	}>;
 	onCardSubmit: (newCard: TypeMyContext["contentCards"][number]) => void;
 	setLikedCards: (idkyeOfCard: TypeMyContext["likedCards"]) => void;
-	toggleLikeInCard: (idkyeOfCard: TypeMyContext["likedCards"]) => void;
+	toggleLikeInCard: (idkyeOfCard: TypeMyContext["likedCards"][number]) => void;
 }

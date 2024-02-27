@@ -39,7 +39,13 @@ export const AppProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 	return (
 		<AppContext.Provider
-			value={{ contentCards, likedCards, setLikedCards, onCardSubmit }}
+			value={{
+				contentCards,
+				likedCards,
+				setLikedCards,
+				onCardSubmit,
+				toggleLikeInCard: () => {},
+			}}
 		>
 			{children}
 		</AppContext.Provider>

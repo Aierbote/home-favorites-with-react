@@ -34,6 +34,7 @@ const Form: FC = memo((): JSX.Element => {
 			imgUrl: newImgUrl,
 			title: newTitle,
 			summary: newSummary,
+			toggleLikeInCard: () => {},
 		};
 
 		utilitySaveCardsToStorage(newCard);

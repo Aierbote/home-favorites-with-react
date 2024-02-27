@@ -39,13 +39,13 @@ const styleHearButton = {
 	height: "2.125rem",
 };
 
-const Card: FC = memo(
+const Card = memo(
 	({
 		id,
 		imgUrl = "https://tse2.mm.bing.net/th?id=OIP.Uge8n3cdvDQTUusYkX_BwAHaFl&pid=Api",
 		title = "title",
 		summary = "summary",
-		toggleLikeInCard,
+		toggleLikeInCard = () => {},
 	}: TypeMyContext["contentCards"][number]): JSX.Element => {
 		const iconTrue = "❤️";
 		const iconFalse = "♡";
@@ -105,6 +105,7 @@ const CardsGrid: FC<GridProps> = memo(({ children }): JSX.Element => {
 				{contentCards?.map(
 					({ id, imgUrl, title, summary }: CardProps): JSX.Element => (
 						<Card
+							id={id}
 							key={id}
 							imgUrl={imgUrl}
 							title={title}
