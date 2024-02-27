@@ -37,4 +37,5 @@ export interface TypeMyContext {
 	}>;
 	onCardSubmit: (newCard: TypeMyContext["contentCards"][number]) => void;
 	setLikedCards: (idkyeOfCard: TypeMyContext["likedCards"]) => void;
+	toggleLikeInCard: (idkyeOfCard: TypeMyContext["likedCards"]) => void;
 }

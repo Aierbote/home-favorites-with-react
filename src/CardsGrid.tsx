@@ -39,13 +39,14 @@ const styleHearButton = {
 	height: "2.125rem",
 };
 
-const Card: FC<CardProps> = memo(
+const Card: FC = memo(
 	({
 		id,
 		imgUrl = "https://tse2.mm.bing.net/th?id=OIP.Uge8n3cdvDQTUusYkX_BwAHaFl&pid=Api",
 		title = "title",
 		summary = "summary",
-	}: CardProps): JSX.Element => {
+		toggleLikeInCard,
+	}: TypeMyContext["contentCards"][number]): JSX.Element => {
 		const iconTrue = "❤️";
 		const iconFalse = "♡";
 		const [isLiked, setIsLiked] = useState(false);
@@ -60,7 +61,13 @@ const Card: FC<CardProps> = memo(
 				<div>
 					<h3>{title.toUpperCase()}</h3>
 					<p> {summary}</p>
-					<button onClick={onSaveToFavorites} style={styleHearButton}>
+					<button
+						onClick={() => {
+							onSaveToFavorites();
+							toggleLikeInCard(id);
+						}}
+						style={styleHearButton}
+					>
 						<span>{isLiked ? iconTrue : iconFalse}</span>
 					</button>
 				</div>
